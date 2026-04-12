@@ -1,29 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 智护安康-脑卒中居家康复平台
-Streamlit 一键部署版（自带依赖安装）
+纯净稳定版（仅本地运行）
 """
 
-# ========== 自动安装依赖（部署时生效，本地运行不影响） ==========
-import subprocess
-import sys
-import importlib
-
-def install_package(package):
-    """自动安装指定的Python包"""
-    try:
-        importlib.import_module(package)
-    except ImportError:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-# 安装所有需要的依赖
-install_package("streamlit")
-install_package("opencv-python")
-install_package("mediapipe")
-install_package("numpy")
-install_package("pyttsx3")
-
-# ========== 正式导入库 ==========
 import streamlit as st
 import cv2
 import mediapipe as mp
