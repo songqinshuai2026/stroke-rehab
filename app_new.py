@@ -1,8 +1,29 @@
 # -*- coding: utf-8 -*-
 """
 智护安康-脑卒中居家康复平台
-Streamlit Cloud 直接部署版
+终极部署版（自动安装所有依赖，无需requirements.txt）
 """
+import subprocess
+import sys
+
+# 强制自动安装所有需要的库（云端专用，本地也能用）
+def install_and_import(package, import_name=None):
+    if import_name is None:
+        import_name = package
+    try:
+        __import__(import_name)
+    except ImportError:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "--no-cache-dir", package])
+        __import__(import_name)
+
+# 按顺序安装所有依赖
+install_and_import("streamlit", "streamlit")
+install_and_import("opencv-python-headless", "cv2")
+install_and_import("mediapipe", "mediapipe")
+install_and_import("numpy", "numpy")
+install_and_import("pillow", "PIL")
+
+# 现在可以正常导入了
 import streamlit as st
 import cv2
 import mediapipe as mp
